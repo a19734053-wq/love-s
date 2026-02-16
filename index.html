@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для тебя 💗</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff9ecf, #ffcce6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease-in-out;
+    text-shadow: 0 0 15px rgba(255,255,255,0.8);
+}
+
+button {
+    background-color: white;
+    border: none;
+    padding: 12px 25px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: #ffe6f2;
+}
+
+#result {
+    margin-top: 25px;
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+    min-height: 30px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    70% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+/* Сердечки */
+.heart {
+    position: absolute;
+    font-size: 35px;
+    animation: fall linear infinite;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Я тебя очень сильно люблю, Жаным Айым 💗</h1>
+
+    <button onclick="showTruth()">Правда?</button>
+    <button onclick="showLove()">Насколько сильно?</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+
+function showTruth() {
+    let result = document.getElementById("result");
+
+    result.style.animation = "none";
+    void result.offsetWidth;
+    result.style.animation = "pop 0.6s ease";
+
+    result.innerHTML = "Каждый день всё сильнее 💞";
+}
+
+function showLove() {
+    let result = document.getElementById("result");
+    result.innerHTML = "Загрузка любви... 0%";
+    let percent = 0;
+
+    let interval = setInterval(function() {
+        percent += 10;
+        result.innerHTML = "Загрузка любви... " + percent + "%";
+
+        if (percent >= 100) {
+            clearInterval(interval);
+            result.innerHTML = "Бесконечно ♾️💗";
+
+            for(let i = 0; i < 25; i++) {
+                createHeart();
+            }
+        }
+    }, 200);
+}
+
+/* Генерация сердечек */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+
+    const hearts = ["Айым💗","💖","💘","💕","💓"];
+    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    heart.style.fontSize = (Math.random() * 40 + 25) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
+}
+
+setInterval(createHeart, 300);
+
+</script>
+
+</body>
+</html
